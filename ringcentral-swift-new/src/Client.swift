@@ -163,7 +163,7 @@ class Client {
 
     
     // Create a request
-    func createRequest(method: String, url: String, query: [String: String]? = nil, body: [String: String]? = nil, headers: [String: String]) -> NSMutableURLRequest {
+    func createRequest(method: String, url: String, query: [String: String]?, body: [String: AnyObject]?, headers: [String: String]) -> NSMutableURLRequest {
         
         //        createUrl()
         //      var properties = parseProperties(method,url,query,body,headers)
@@ -176,7 +176,8 @@ class Client {
             for key in q.keys {
                 queryFinal = queryFinal + key + "=" + q[key]! + "&"
             }
-            
+        }
+        
             
             
             // Headers
@@ -187,28 +188,39 @@ class Client {
             }
         
             
-        }
+        
         
         // Body
         var bodyString: String
         var bodyFinal: String = ""
         if (headers["Content-type"]! == "application/x-www-form-urlencoded;charset=UTF-8") {
             
-//            if let q = body {
-////               bodyFinal = "?"
-            if let body = body {
-                for (key, value) in body {
-                    bodyFinal = bodyFinal + key + "=" + body[key]! + "&"
+//            var bodyString: String
+//
+            if let q = body {
+//                bodyString = jsonToString(json)
+//            } else {
+//                bodyString = body as! String
+//            }
+
+//            
+//            if let q: [String: AnyObject] = body {
+               bodyFinal = "?"
+////            if let body: AnyObject = body {
+//            if let body as [String: AnyObject] {
+                for key in q.keys {
+                    bodyFinal = bodyFinal + key + "=" + (q[key]! as! String) + "&"
                 }
                 truncatedBodyFinal = bodyFinal.substringToIndex(bodyFinal.endIndex.predecessor())
 //            println(truncatedBodyFinal)
             }
         }
         
+        
         else {
         
-            if let json = body as [String: String]? {
-            bodyFinal = jsonToString(json)
+            if let json = body as AnyObject? {
+            bodyFinal = jsonToString(json as! [String : AnyObject])
             truncatedBodyFinal = bodyFinal
             }
         }

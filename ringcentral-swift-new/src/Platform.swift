@@ -104,9 +104,8 @@ class Platform {
         //        let readdata = NSJSONSerialization.JSONObjectWithData(response.getData()!, options: nil, response.getError()) as! NSDictionary
 //        println(response.getDict())
         self.auth.setData(response.getDict())
-        println("Is access token valid",self.auth.accessTokenValid())
-//        println("The auth data is",self.auth.data())
-        println("The auth data is")
+        println("Is access token valid : ",self.auth.accessTokenValid())
+        println("The auth data is : ")
         println(response.JSONStringify(response.getDict(), prettyPrinted: true))
         return response
     }
@@ -179,7 +178,7 @@ class Platform {
     /// @param: path    The token endpoint
     /// @param: array   The body
     /// @return ApiResponse
-    func requestToken(path: String, body: Dictionary<String,String>) -> Transaction {
+    func requestToken(path: String, body: [String:AnyObject]) -> Transaction {
         let authHeader = "Basic" + " " + self.apiKey()
         var headers: [String: String] = [:]
         headers["Authorization"] = authHeader
@@ -323,6 +322,8 @@ class Platform {
             }
     
         }
+    
+    // Generic Method calls  ( HT
     
     // Generic Method Calls
     
