@@ -310,20 +310,32 @@ class Platform {
     }
     
     
-    // My methods ( Generic HTTP methods )
-    func get(url: String, query: [String: String]? = nil, headers: [String: String]? = nil, body: [String: String]? = nil, options: [String: String]? = nil, completion: (transaction: Transaction) -> Void) {
-        
-        let urlCreated = createUrl(url,options: options!)
-        
-        sendRequest(self.client.createRequest("GET", url: url, query: query, body: body!, headers: headers!), path: url, options: options!) {
-            (t) in
-            completion(transaction: t)
-            
-        }
-        
+//    // My methods ( Generic HTTP methods )
+//    func get(url: String, query: [String: String]? = nil, headers: [String: String]? = nil, body: [String: String]? = nil, options: [String: String]? = nil, completion: (transaction: Transaction) -> Void) {
+//        
+//        let urlCreated = createUrl(url,options: options!)
+//        
+//        sendRequest(self.client.createRequest("GET", url: url, query: query, body: body!, headers: headers!), path: url, options: options!) {
+//            (t) in
+//            completion(transaction: t)
+//            
+//        }
+//        
+//    }
+//    
+    // Generic Method calls  ( HTTP )
+    func get(url: String, query: [String: String] = ["":""], completion: (transaction: Transaction) -> Void) {
+        apiCall([
+            "method": "GET",
+            "url": url,
+            "query": query
+            ]) {
+                (t) in
+                completion(transaction: t)
+                
+               }
     }
     
-    // Generic Method calls  ( HT
     
     // Generic Method Calls
     
@@ -376,74 +388,75 @@ class Platform {
     //    /// Generic HTTP request
     //    ///
     //    /// :param: options     List of options for HTTP request
-    //    func apiCall(options: [String: AnyObject]) {
-    //        var method = ""
-    //        var url = ""
-    //        var headers: [String: String] = ["": ""]
-    //        var query: [String: String]?
-    //        var body: AnyObject = ""
-    //        if let m = options["method"] as? String {
-    //            method = m
-    //        }
-    //        if let u = options["url"] as? String {
-    //            url = self.server + u
-    //        }
-    //        if let h = options["headers"] as? [String: String] {
-    //            headers = h
-    //        }
-    //        if let q = options["query"] as? [String: String] {
-    //            query = q
-    //        }
-    //        if let b = options["body"] {
-    //            if let check = b as? NSDictionary {
-    //                body = check
-    //            } else {
-    //                body = b as! String
-    //            }
-    //        }
-    //        var request = Request(method: method, url: url, headers: headers, query: query, body: body)
-    //
-    //        request.setHeader("Authorization", value: "Bearer" + " " + auth.accessToken())
-    //        request.send()
-    //    }
+        func apiCall(options: [String: AnyObject]) {
+            
+//            var let requestOptions = [String: AnyObject]
+            var method = ""
+            var url = ""
+            var headers: [String: String] = ["": ""]
+            var query: [String: String] = ["":""]
+            var body: [String: AnyObject] = ["":""]
+            if let m = options["method"] as? String {
+                method = m
+            }
+            if let u = options["url"] as? String {
+                url = self.server + u
+            }
+            if let h = options["headers"] as? [String: String] {
+                headers = h
+            }
+            if let q = options["query"] as? [String: String] {
+                query = q
+            }
+            if let b = options["body"] as? [String: AnyObject] {
+//                if let check = b as? NSDictionary {
+                    body = options["body"] as! [String: AnyObject]
+//                } else {
+                    body = options["body"] as! [String: AnyObject]
+                }
+            
+            
+            sendRequest(self.client.createRequest("GET", url: url, query: query, body: body, headers: headers), path: url, options: options)
+    }
+    
     
     /// Generic HTTP request with completion handler
     ///
     /// :param: options         List of options for HTTP request
     /// :param: completion      Completion handler for HTTP request
-    //    func apiCall(options: [String: AnyObject], completion: (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void) {
-    //        var method = ""
-    //        var url = ""
-    //        var headers: [String: String] = ["": ""]
-    //        var query: [String: String]?
-    //        var body: AnyObject = ""
-    //        if let m = options["method"] as? String {
-    //            method = m
-    //        }
-    //        if let u = options["url"] as? String {
-    //            url = self.server + u
-    //        }
-    //        if let h = options["headers"] as? [String: String] {
-    //            headers = h
-    //        }
-    //        if let q = options["query"] as? [String: String] {
-    //            query = q
-    //        }
-    //        if let b = options["body"] {
-    //            if let check = b as? NSDictionary {
-    //                body = check
-    //            } else {
-    //                body = b as! String
-    //            }
-    //        }
-    //        var request = Request(method: method, url: url, headers: headers, query: query, body: body)
-    //        request.setHeader("Authorization", value: "Bearer" + " " + auth.accessToken())
-    //        request.send() {
-    //            (data, response, error) in
-    //            completion(data: data, response: response, error: error)
-    //        }
-    //
-    //    }
+        func apiCall(options: [String: AnyObject], completion: (transaction: Transaction) -> Void) {
+            var method = ""
+            var url = ""
+            var headers: [String: String] = ["": ""]
+            var query: [String: String]?
+//            var body: AnyObject = ""
+            var body: [String: AnyObject] = ["":""]
+            if let m = options["method"] as? String {
+                method = m
+            }
+            if let u = options["url"] as? String {
+                url =  u
+            }
+            if let h = options["headers"] as? [String: String] {
+                headers = h
+            }
+            if let q = options["query"] as? [String: String] {
+                query = q
+            }
+            if let b = options["body"] as? [String: AnyObject] {
+                //                if let check = b as? NSDictionary {
+                body = options["body"] as! [String: AnyObject]
+                //                } else {
+//                body = options["body"] as! [String: AnyObject]
+            }
+            
+            sendRequest(self.client.createRequest("GET", url: url, query: query, body: body, headers: headers), path: url, options: options) {
+                (t) in
+                completion(transaction: t)
+                
+            }
+    
+        }
     //
     //    // ringout
     //    func testApiCall() {

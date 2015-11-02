@@ -193,7 +193,7 @@ class Client {
         // Body
         var bodyString: String
         var bodyFinal: String = ""
-        if (headers["Content-type"]! == "application/x-www-form-urlencoded;charset=UTF-8") {
+        if (headers["Content-type"] == "application/x-www-form-urlencoded;charset=UTF-8") {
             
             //            var bodyString: String
             //

@@ -12,20 +12,24 @@
 	<dict>
 		<key>283E717BE05CFF9F67440C253C25A0B958F47F31</key>
 		<string>https://github.com/anilkumarbp/RC-Swift-Anil.git</string>
+		<key>A422917BC4B7744C2022AFADBC569CDEC9557C13</key>
+		<string>https://github.com/anilkumarbp/RingCentral-Swift-SDK.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>ringcentral-swift/src/src.xcworkspace</string>
+	<string>src/src.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>283E717BE05CFF9F67440C253C25A0B958F47F31</key>
 		<string>../../..</string>
+		<key>A422917BC4B7744C2022AFADBC569CDEC9557C13</key>
+		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/anilkumarbp/RC-Swift-Anil.git</string>
+	<string>https://github.com/anilkumarbp/RingCentral-Swift-SDK.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>283E717BE05CFF9F67440C253C25A0B958F47F31</string>
+	<string>A422917BC4B7744C2022AFADBC569CDEC9557C13</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
@@ -34,7 +38,15 @@
 			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>283E717BE05CFF9F67440C253C25A0B958F47F31</string>
 			<key>IDESourceControlWCCName</key>
-			<string>GitHub</string>
+			<string></string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>A422917BC4B7744C2022AFADBC569CDEC9557C13</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ringcentral-swift</string>
 		</dict>
 	</array>
 </dict>

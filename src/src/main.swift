@@ -24,13 +24,13 @@ var platform = rcsdk.getPlatform()
 println("Platform singleton")
 platform.login(username, ext:"101", password: password)
 
-//// Test a GET request
-//platform.get("/account/~/extension/~/call-log") {
-//    (transaction) in
-//    println(transaction.getError())
-//    println(transaction.getResponse())
-//    println(transaction.getDict())
-//}
-//sleep(5)
-//
-//print("completed")
+// Test a GET request
+platform.get("/account/~/extension/~/call-log") {
+    (transaction) in
+    println(transaction.getError())
+    println(transaction.getResponse())
+    println(transaction.getDict())
+}
+sleep(5)
+
+print("completed")
