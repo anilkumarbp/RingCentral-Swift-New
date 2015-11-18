@@ -75,11 +75,18 @@ class Client {
     
     func sendReal(request: NSMutableURLRequest, completion: (transaction: Transaction) -> Void) {
         var trans = Transaction(request: request)
+        println("inside sendReal :")
         var task: NSURLSessionDataTask = NSURLSession.sharedSession().dataTaskWithRequest(request) {
             (data, response, error) in
             trans.setData(data)
+//            println("The data is: ",trans.getData())
             trans.setResponse(response)
+//            println("The response is :",trans.getResponse())
             trans.setError(error)
+            var errors: NSError?
+            let readdata = NSJSONSerialization.JSONObjectWithData(data!, options: nil, error: &errors) as! NSDictionary
+            trans.setDict(readdata)
+            completion(transaction:trans)
         }
         task.resume()
     }
@@ -163,65 +170,119 @@ class Client {
     
     
     // Create a request
-    func createRequest(method: String, url: String, query: [String: String]?, body: [String: AnyObject]?, headers: [String: String]) -> NSMutableURLRequest {
+    func createRequest(method: String, url: String, query: [String: String]?=nil, body: [String: AnyObject]?, headers: [String: String]) -> NSMutableURLRequest {
         
         //        createUrl()
         //      var properties = parseProperties(method,url,query,body,headers)
         var truncatedBodyFinal: String = ""
+        var truncatedQueryFinal: String = ""
         var queryFinal: String = ""
         
-        // Query
-        if let q = query {
-            queryFinal = "?"
-            for key in q.keys {
-                queryFinal = queryFinal + key + "=" + q[key]! + "&"
+        // Check if the Query is empty
+//        if (query?.isEmpty == 1) {
+//            println("Query is empty")
+//            queryFinal = ""
+//        }
+//        else {
+            if let q = query {
+                queryFinal = "?"
+
+                for key in q.keys {
+                    if(q[key] == "") {
+                        queryFinal = "&"
+                    }
+                    else {
+                     queryFinal = queryFinal + key + "=" + q[key]! + "&"
+                    }                    
+                }
+                truncatedQueryFinal = queryFinal.substringToIndex(queryFinal.endIndex.predecessor())
+                println("The truncated queryFInal is :"+truncatedQueryFinal)
+
+                println("Non-Empty Query List")
             }
-        }
+//        }
+        
         
         
         
         // Headers
-        if (headers["Content-type"] == nil) {
-            var headers: [String: String] = [:]
-            headers[contentType] = jsonContentType
-            headers[accept] = jsonContentType
-        }
-        
+//        if (headers.isEmpty) {
+//            var headers: [String: String] = [:]
+//            headers[contentType] = jsonContentType
+//            headers[accept] = jsonContentType
+//            println(headers[contentType])
+//            println(headers[accept])
+//        }
+//        
         
         
         
         // Body
         var bodyString: String
         var bodyFinal: String = ""
-        if (headers["Content-type"] == "application/x-www-form-urlencoded;charset=UTF-8") {
-            
-            //            var bodyString: String
-            //
-            if let q = body {
-                //                bodyString = jsonToString(json)
-                //            } else {
-                //                bodyString = body as! String
-                //            }
-                
-                //
-                //            if let q: [String: AnyObject] = body {
-                bodyFinal = "?"
-                ////            if let body: AnyObject = body {
-                //            if let body as [String: AnyObject] {
-                for key in q.keys {
-                    bodyFinal = bodyFinal + key + "=" + (q[key]! as! String) + "&"
-                }
-                truncatedBodyFinal = bodyFinal.substringToIndex(bodyFinal.endIndex.predecessor())
-                //            println(truncatedBodyFinal)
-            }
+//        if (headers["Content-type"] == "application/x-www-form-urlencoded;charset=UTF-8") {
+//            
+//            //            var bodyString: String
+//            //
+//            if let q = body {
+//                //                bodyString = jsonToString(json)
+//                //            } else {
+//                //                bodyString = body as! String
+//                //            }
+//                
+//                //
+//                //            if let q: [String: AnyObject] = body {
+//                bodyFinal = "?"
+//                ////            if let body: AnyObject = body {
+//                //            if let body as [String: AnyObject] {
+//                for key in q.keys {
+//                    bodyFinal = bodyFinal + key + "=" + (q[key]! as! String) + "&"
+//                }
+//                truncatedBodyFinal = bodyFinal.substringToIndex(bodyFinal.endIndex.predecessor())
+//                //            println(truncatedBodyFinal)
+//            }
+//        }
+        
+        // Check if the body is empty
+        if (body?.count == 0) {
+            println("Body is Empty")
+            truncatedBodyFinal = ""
         }
-            
-            
+//            
+//            
         else {
             
-            if let json = body as AnyObject? {
-                bodyFinal = jsonToString(json as! [String : AnyObject])
-                truncatedBodyFinal = bodyFinal
+            // Check if body is for authentication
+            if (headers["Content-type"] == "application/x-www-form-urlencoded;charset=UTF-8") {
+                
+                //            var bodyString: String
+                //
+                if let q = body {
+                    //                bodyString = jsonToString(json)
+                    //            } else {
+                    //                bodyString = body as! String
+                    //            }
+                    
+                    //
+                    //            if let q: [String: AnyObject] = body {
+                    bodyFinal = "?"
+                    ////            if let body: AnyObject = body {
+                    //            if let body as [String: AnyObject] {
+                    for key in q.keys {
+                        bodyFinal = bodyFinal + key + "=" + (q[key]! as! String) + "&"
+                    }
+                    truncatedBodyFinal = bodyFinal.substringToIndex(bodyFinal.endIndex.predecessor())
+                                println(truncatedBodyFinal)
+                }
+            }
+            
+            // Format the body
+            else {
+                if let json = body as AnyObject? {
+                    println("Non-Empty Body")
+                    bodyFinal = jsonToString(json as! [String : AnyObject])
+                    truncatedBodyFinal = bodyFinal
+                }
             }
         }
         
@@ -229,7 +290,12 @@ class Client {
         // Create a NSMutableURLRequest
         var request = NSMutableURLRequest()
         
-        if let nsurl = NSURL(string: url + queryFinal) {
+        // check for certain things
+        println("Inside Create Request")
+        println("The url is :"+url)
+        println("The queryFinal is :"+queryFinal)
+        
+        if let nsurl = NSURL(string: url + truncatedQueryFinal) {
             request = NSMutableURLRequest(URL: nsurl)
             request.HTTPMethod = method
             request.HTTPBody = truncatedBodyFinal.dataUsingEncoding(NSUTF8StringEncoding)
@@ -249,6 +315,8 @@ class Client {
     func requestFactory(method: String, url: String, query: [String: String]?, body: AnyObject, headers: [String: String]) -> NSMutableURLRequest {
         
         var queryFinal: String = ""
+        
+ 
         
         if let q = query {
             queryFinal = "?"

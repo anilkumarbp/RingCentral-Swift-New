@@ -1,4 +1,4 @@
-//
+    //
 //  Platform.swift
 //  src
 //
@@ -66,12 +66,15 @@ class Platform {
     /// @param: options           The password of the RingCentral account
     /// @response: ApiResponse    The password of the RingCentral account
     func createUrl(path: String, options: [String: AnyObject]) -> String {
+        println("Inside CreateURL")
         var builtUrl = ""
-        if(options["skipAuthCheck"] != nil){
+        if(options["skipAuthCheck"] === true){
             builtUrl = builtUrl + self.server + path
+            println("The Built url is :"+builtUrl)
             return builtUrl
         }
         builtUrl = builtUrl + self.server + self.URL_PREFIX + "/" + self.API_VERSION + path
+        println("The Built url is :"+builtUrl)
         return builtUrl
     }
     
@@ -145,7 +148,7 @@ class Platform {
         if options["skipAuthCheck"] == nil {
             ensureAuthentication()
             let authHeader = self.auth.tokenType() + " " + self.auth.accessToken()
-            request.setValue("Authorization", forHTTPHeaderField: authHeader)
+            request.setValue(authHeader, forHTTPHeaderField: "Authorization")
             //            check = 1
         }
         //        let url = createUrl(path,check: check,options: ["addServer": true])
@@ -184,7 +187,7 @@ class Platform {
         headers["Authorization"] = authHeader
         headers["Content-type"] = "application/x-www-form-urlencoded;charset=UTF-8"
         var options: [String: AnyObject] = [:]
-        options["skipAuthCheck"] = "true"
+        options["skipAuthCheck"] = true
         let urlCreated = createUrl(path,options: options)
         let request = self.client.createRequest("POST", url: urlCreated, query: nil, body: body, headers: headers)
         return self.sendRequest(request, path: path, options: options)
@@ -304,6 +307,7 @@ class Platform {
     ///
     ///
     func ensureAuthentication() {
+        println("Inside EnsureAuthentication")
         if (!self.auth.accessTokenValid()) {
             refresh()
         }
@@ -323,18 +327,46 @@ class Platform {
 //        
 //    }
 //    
-    // Generic Method calls  ( HTTP )
+    // Generic Method calls  ( HTTP ) GET
     func get(url: String, query: [String: String] = ["":""], completion: (transaction: Transaction) -> Void) {
         apiCall([
             "method": "GET",
             "url": url,
             "query": query
-            ]) {
+            ])
+            {
                 (t) in
                 completion(transaction: t)
                 
-               }
+            }
     }
+    // Generic Method calls  ( HTTP ) without completion handler
+    func get(url: String, query: [String: String] = ["":""]) -> Transaction {
+        // Check if query is empty
+       
+            return apiCall([
+                "method": "GET",
+                "url": url,
+                "query": query
+                ])
+    }
+    
+    
+    // Generic Method calls  ( HTTP ) POST
+    func post(url: String, body: String = "", completion: (transaction: Transaction) -> Void) {
+        apiCall([
+            "method": "GET",
+            "url": url,
+            "body": body
+            ])
+            {
+                (t) in
+                completion(transaction: t)
+                
+            }
+    }
+    // Generic Method calls ( HTTP ) without the completion handler
+    
     
     
     // Generic Method Calls
@@ -388,19 +420,20 @@ class Platform {
     //    /// Generic HTTP request
     //    ///
     //    /// :param: options     List of options for HTTP request
-        func apiCall(options: [String: AnyObject]) {
-            
-//            var let requestOptions = [String: AnyObject]
+        func apiCall(options: [String: AnyObject]) -> Transaction {
             var method = ""
             var url = ""
-            var headers: [String: String] = ["": ""]
-            var query: [String: String] = ["":""]
-            var body: [String: AnyObject] = ["":""]
+            var headers = [String: String]()
+            headers["Content-Type"] = "application/json"
+            headers["Accept"] = "application/json"
+            var query: [String: String]?
+            //            var body: AnyObject = ""
+            var body = [String: AnyObject]()
             if let m = options["method"] as? String {
                 method = m
             }
             if let u = options["url"] as? String {
-                url = self.server + u
+                url =  u
             }
             if let h = options["headers"] as? [String: String] {
                 headers = h
@@ -408,15 +441,17 @@ class Platform {
             if let q = options["query"] as? [String: String] {
                 query = q
             }
+            else {
+                query = nil
+            }
             if let b = options["body"] as? [String: AnyObject] {
-//                if let check = b as? NSDictionary {
-                    body = options["body"] as! [String: AnyObject]
-//                } else {
-                    body = options["body"] as! [String: AnyObject]
-                }
+                //                if let check = b as? NSDictionary {
+                body = options["body"] as! [String: AnyObject]
+                //                } else {
+                //                body = options["body"] as! [String: AnyObject]
+            }
             
-            
-            sendRequest(self.client.createRequest("GET", url: url, query: query, body: body, headers: headers), path: url, options: options)
+            return sendRequest(self.client.createRequest("GET", url: url, query: query, body: body, headers: headers), path: url, options: options)
     }
     
     
@@ -425,12 +460,15 @@ class Platform {
     /// :param: options         List of options for HTTP request
     /// :param: completion      Completion handler for HTTP request
         func apiCall(options: [String: AnyObject], completion: (transaction: Transaction) -> Void) {
+            println("Inside apiCall")
             var method = ""
             var url = ""
-            var headers: [String: String] = ["": ""]
+            var headers = [String: String]()
+            headers["Content-Type"] = "application/json"
+            headers["Accept"] = "application/json"
             var query: [String: String]?
 //            var body: AnyObject = ""
-            var body: [String: AnyObject] = ["":""]
+            var body = [String: AnyObject]()
             if let m = options["method"] as? String {
                 method = m
             }
@@ -450,7 +488,9 @@ class Platform {
 //                body = options["body"] as! [String: AnyObject]
             }
             
-            sendRequest(self.client.createRequest("GET", url: url, query: query, body: body, headers: headers), path: url, options: options) {
+            let urlCreated = createUrl(url,options: options)
+            
+            sendRequest(self.client.createRequest("GET", url: urlCreated, query: query, body: body, headers: headers), path: url, options: options) {
                 (t) in
                 completion(transaction: t)
                 

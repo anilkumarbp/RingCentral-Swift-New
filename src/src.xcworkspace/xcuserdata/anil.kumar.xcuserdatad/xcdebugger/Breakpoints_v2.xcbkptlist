@@ -10,27 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Platform.swift"
-            timestampString = "468140844.421117"
+            timestampString = "469497599.401344"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "415"
-            endingLineNumber = "415"
-            landmarkName = "apiCall(_:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Platform.swift"
-            timestampString = "468141051.810604"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "453"
-            endingLineNumber = "453"
+            startingLineNumber = "479"
+            endingLineNumber = "479"
             landmarkName = "apiCall(_:completion:)"
             landmarkType = "5">
             <Locations>
@@ -42,12 +26,12 @@
                   moduleName = "src"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/anil.kumar/GitHub/ringcentral-swift/src/Platform.swift"
-                  timestampString = "468140956.518803"
+                  timestampString = "469488875.353811"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "454"
-                  endingLineNumber = "454"
-                  offsetFromSymbolStart = "4207">
+                  startingLineNumber = "474"
+                  endingLineNumber = "474"
+                  offsetFromSymbolStart = "5340">
                </Location>
                <Location
                   shouldBeEnabled = "No"
@@ -57,11 +41,11 @@
                   moduleName = "src"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/anil.kumar/GitHub/ringcentral-swift/src/Platform.swift"
-                  timestampString = "468140956.518935"
+                  timestampString = "469488875.353951"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "456"
-                  endingLineNumber = "456"
+                  startingLineNumber = "476"
+                  endingLineNumber = "476"
                   offsetFromSymbolStart = "16">
                </Location>
             </Locations>
@@ -70,45 +54,93 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Platform.swift"
+            timestampString = "469497599.401344"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "409"
+            endingLineNumber = "409"
+            landmarkName = "apiCall(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/main.swift"
-            timestampString = "468136416.187829"
+            timestampString = "469305128.4377"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28">
+            startingLineNumber = "26"
+            endingLineNumber = "26">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Transaction.swift"
+            timestampString = "469257473.772843"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
+            landmarkName = "getDict()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Client.swift"
+            timestampString = "469309635.562048"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
+            landmarkName = "sendReal(_:completion:)"
+            landmarkType = "5">
             <Locations>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "main"
+                  symbolName = "src.Client.sendReal (src.Client)(ObjectiveC.NSMutableURLRequest, completion : (transaction : src.Transaction) -&gt; ()) -&gt; ()"
                   moduleName = "src"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/anil.kumar/GitHub/ringcentral-swift/src/src/main.swift"
-                  timestampString = "468141098.846284"
+                  urlString = "file:///Users/anil.kumar/GitHub/ringcentral-swift/src/Client.swift"
+                  timestampString = "469267380.512606"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "28"
-                  endingLineNumber = "28"
-                  offsetFromSymbolStart = "1090">
+                  startingLineNumber = "78"
+                  endingLineNumber = "78"
+                  offsetFromSymbolStart = "110">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "src.(closure #1)"
+                  symbolName = "function signature specialization &lt;Arg[3] = Dead, Arg[4] = Value Promoted from InOut&gt; of src.Client.(sendReal (src.Client) -&gt; (ObjectiveC.NSMutableURLRequest, completion : (transaction : src.Transaction) -&gt; ()) -&gt; ()).(closure #1)"
                   moduleName = "src"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/anil.kumar/GitHub/ringcentral-swift/src/src/main.swift"
-                  timestampString = "468141098.846504"
+                  urlString = "file:///Users/anil.kumar/GitHub/ringcentral-swift/src/Client.swift"
+                  timestampString = "469267380.512768"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "30"
-                  endingLineNumber = "30"
-                  offsetFromSymbolStart = "12">
+                  startingLineNumber = "80"
+                  endingLineNumber = "80"
+                  offsetFromSymbolStart = "27">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -119,13 +151,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Platform.swift"
-            timestampString = "468140844.421117"
+            filePath = "Client.swift"
+            timestampString = "469309635.562048"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "391"
-            endingLineNumber = "391"
-            landmarkName = "apiCall(_:)"
+            startingLineNumber = "80"
+            endingLineNumber = "80"
+            landmarkName = "sendReal(_:completion:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -136,12 +168,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Platform.swift"
-            timestampString = "468140844.421117"
+            timestampString = "469497599.401344"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "392"
-            endingLineNumber = "392"
-            landmarkName = "apiCall(_:)"
+            startingLineNumber = "448"
+            endingLineNumber = "448"
+            landmarkName = "apiCall(_:completion:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -151,13 +183,27 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Platform.swift"
-            timestampString = "468140844.421117"
+            filePath = "src/main.swift"
+            timestampString = "469489742.602655"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "419"
-            endingLineNumber = "419"
-            landmarkName = "apiCall(_:)"
+            startingLineNumber = "32"
+            endingLineNumber = "32">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Platform.swift"
+            timestampString = "469497599.401344"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "349"
+            endingLineNumber = "349"
+            landmarkName = "get(_:query:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
